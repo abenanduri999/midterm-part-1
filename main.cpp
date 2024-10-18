@@ -5,47 +5,47 @@ using namespace std;
 
 const int MIN_NR = 10, MAX_NR = 99, MIN_LS = 5, MAX_LS = 20;
 
-class DoublyLinkedList  
+class DoublyLinkedList  //creating class for list
         {
         private:
 
             struct Node {
-            int data;
-            Node* prev;
-            Node* next;
+            int data;    // value to be held in node
+            Node* prev;  // pointer to go backwards
+            Node* next;     // pointer to go forwards
             Node(int val, Node* p = nullptr, Node* n = nullptr) {
-            data = val;
+            data = val; 
             prev = p;
             next = n;
             }
         };
-        Node* head;
-        Node* tail;
+        Node* head; // pointer to poitn at beginging of list
+        Node* tail; // pointer to point at end of list
 
         public:
-            DoublyLinkedList() { head = nullptr; tail = nullptr; }
+            DoublyLinkedList() { head = nullptr; tail = nullptr; } // default constuctors pointing to null
 
-            void insert_after(int value, int position) 
+            void insert_after(int value, int position)  //insertaion function
             {
-            if (position < 0) {
-            cout << "Position must be >= 0." << endl;
+            if (position < 0) {  // ot check to make sure teh position chosen in list actually exists
+            cout << "Position must be >= 0." << endl; 
             return;
             }
 
-            Node* newNode = new Node(value);
+            Node* newNode = new Node(value); // create a new node to hold data of the node wanting to isnert
             if (!head) {
-            head = tail = newNode;
+            head = tail = newNode; // if list is empty new node gets added in
             return;
             }
-            Node* temp = head;
-            for (int i = 0; i < position && temp; ++i)
+            Node* temp = head; // list not empty so make temp node to point to the head
+            for (int i = 0; i < position && temp; ++i) // loop to advance temp 
             temp = temp->next;
-            if (!temp) {
+            if (!temp) {   // checks to see if temp is valid and doesnt go past the linked list
             cout << "Position exceeds list size. Node not inserted.\n";
-            delete newNode;
+            delete newNode; 
             return;
             }
-            newNode->next = temp->next;
+            newNode->next = temp->next; //
             newNode->prev = temp;
             if (temp->next)
             temp->next->prev = newNode;
