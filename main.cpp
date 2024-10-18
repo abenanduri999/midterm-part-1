@@ -85,7 +85,7 @@ class DoublyLinkedList  //creating class for list
             return;
             }
             if (pos == 1) { //if the first position
-            pop_front(); //call pop_front that deletes the first node 
+            pop_front(); //call pop_front that deletes the first node the head
             return;
             }
             Node* temp = head; //temp node
@@ -95,59 +95,60 @@ class DoublyLinkedList  //creating class for list
             return;
             }
             else
-            temp = temp->next; 
+            temp = temp->next;  //optherwise progress the temp  
             }
             if (!temp) {
             cout << "Position doesn't exist." << endl;
             return;
             }
-            if (!temp->next) {
+            if (!temp->next) { //if temp next isnt pointing at anything, at tail, use popback to delete it
             pop_back();
             return;
             }
-            Node* tempPrev = temp->prev;
+
+            Node* tempPrev = temp->prev; 
             tempPrev->next = temp->next;
             temp->next->prev = tempPrev;
             delete temp;
             }
 
-            void push_back(int v) 
+            void push_back(int v)  // add node to tail
             {
-            Node* newNode = new Node(v);
+            Node* newNode = new Node(v); // new node to add
             if (!tail)
-            head = tail = newNode;
+            head = tail = newNode; // if empty klist add it in and have it be head and tail of list
             else {
-            tail->next = newNode;
-            newNode->prev = tail;
-            tail = newNode;
+            tail->next = newNode; // if not, point the tail to the new node
+            newNode->prev = tail; // the new node is pointing backwards to old tail
+            tail = newNode; // newnode is new tail
             }
             }
 
-            void push_front(int v) 
+            void push_front(int v)  //add node to ehad
             {
-            Node* newNode = new Node(v);
-            if (!head)
+            Node* newNode = new Node(v); //node to add
+            if (!head) //if empty opint tail and head to the new node
             head = tail = newNode;
             else {
-            newNode->next = head;
-            head->prev = newNode;
-            head = newNode;
+            newNode->next = head; //point newnode forards to the head
+            head->prev = newNode; // old head now point backwards to enwnode
+            head = newNode; // the newnode is the new head
             }
             }
 
-            void pop_front() 
+            void pop_front()  //delete the first node
             {
-            if (!head) {
+            if (!head) { //check to see it list is empty, head not pointint to anything
             cout << "List is empty." << endl;
             return;
             }
-            Node * temp = head;
+            Node * temp = head; //create temp node that points to head
             if (head->next) {
-            head = head->next;
-            head->prev = nullptr;
+            head = head->next; //have previous head point forwards to the next node
+            head->prev = nullptr; //the new head points backwards to null nad not the temo that is pointing to head
             }
             else
-            head = tail = nullptr;
+            head = tail = nullptr; //if only one node, head and tail point to null and list is empty
             delete temp;
             }
             
