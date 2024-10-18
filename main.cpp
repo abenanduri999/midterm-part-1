@@ -221,7 +221,7 @@ int main() {
 //cout << MIN_NR + MIN_LS + MAX_NR + MAX_LS; // dummy statement to avoid compiler warning
 
 DoublyLinkedList list;    // create a list
-int size = rand()% (MAX_LS - MIN_LS + 1) + MIN_LS;  
+int size = rand()% (MAX_LS - MIN_LS + 1) + MIN_LS; // howmany nodes we would list  
 
 for(int i = 0; i < size; ++i)
     list.push_back(rand() % (MAX_NR - MIN_NR + 1) + MIN_NR); //populate list 
