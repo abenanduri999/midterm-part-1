@@ -39,7 +39,7 @@ class DoublyLinkedList  //creating class for list
             }
             Node* temp = head; // list not empty so make temp node to point to the head
             for (int i = 0; i < position && temp; ++i) // loop to advance temp 
-            temp = temp->next;
+            temp = temp->next; 
             
             if (!temp) 
             {   // checks to see if temp is valid and doesnt go past the linked list
@@ -62,20 +62,20 @@ class DoublyLinkedList  //creating class for list
 
             void delete_val(int value) 
             {
-            if (!head) return;
-            Node* temp = head;
-            while (temp && temp->data != value)
-            temp = temp->next;
-            if (!temp) return;
-            if (temp->prev)
-            temp->prev->next = temp->next;
+            if (!head) return; //if list is empty and head is pointing at hnull
+            Node* temp = head; //make temp node and poitn at the head
+            while (temp && temp->data != value) // when the data value we are looking for isn't the one, keep 
+            temp = temp->next;                      // moving forward until the value is the one, advance ptr
+            if (!temp) return;      //check to make sure temp is valid
+            if (temp->prev)        //check to make sure temp isn't at head, cause temp->prev is pointing to null
+            temp->prev->next = temp->next; //we make the one before temp, not poitn forward to temp, but to the one after temp
             else
-            head = temp->next;
-            if (temp->next)
-            temp->next->prev = temp->prev;
+            head = temp->next; //if head, then head is not the next node after temp
+            if (temp->next) // check to make sure temp isnt tail
+            temp->next->prev = temp->prev; //make the node after temp point backwards to not temp, but the one before temp
             else
-            tail = temp->prev;
-            delete temp;
+            tail = temp->prev; // iftemp is tail, have tail point to the oen before ttemp
+            delete temp; //delete temp and whichever node it was pointint to
             }
             
             void delete_pos(int pos) //delete node based on position
@@ -149,23 +149,23 @@ class DoublyLinkedList  //creating class for list
             }
             else
             head = tail = nullptr; //if only one node, head and tail point to null and list is empty
-            delete temp;
+            delete temp; //delete temp and whatever is pointing to , so old head isnt there anymore
             }
             
-            void pop_back() 
+            void pop_back()  // delete the last element in list
             {
             if (!tail) {
-            cout << "List is empty." << endl;
+            cout << "List is empty." << endl; //check to see if list is empty
             return;
             }
-            Node * temp = tail;
-            if (tail->prev) {
-            tail = tail->prev;
-            tail->next = nullptr;
+            Node * temp = tail; //make temp node poitn to last node
+            if (tail->prev) { //if temp can point backwards to another node, meaning there isnt only one node
+            tail = tail->prev; //assign it as the new tail of the list 
+            tail->next = nullptr; //point the tail forwards to null, and not the old head
             }
             else
-            head = tail = nullptr;
-            delete temp;
+            head = tail = nullptr; //if only one node in list, it head and tail point to null
+            delete temp; //delete the temp node that was pointing to tail
             }
             
             ~DoublyLinkedList() //class destructor
