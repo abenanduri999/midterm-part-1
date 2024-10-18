@@ -40,17 +40,23 @@ class DoublyLinkedList  //creating class for list
             Node* temp = head; // list not empty so make temp node to point to the head
             for (int i = 0; i < position && temp; ++i) // loop to advance temp 
             temp = temp->next;
-            if (!temp) {   // checks to see if temp is valid and doesnt go past the linked list
+            
+            if (!temp) 
+            {   // checks to see if temp is valid and doesnt go past the linked list
             cout << "Position exceeds list size. Node not inserted.\n";
             delete newNode; 
             return;
             }
-            newNode->next = temp->next; //
-            newNode->prev = temp;
-            if (temp->next)
-            temp->next->prev = newNode;
+
+            newNode->next = temp->next; //whatever newNode is poitning at assign it to temp
+            newNode->prev = temp; //the old node is going to be pointed to where temp is
+            
+            if (temp->next) // check to make sure newnode isn't being placed in end
+            temp->next->prev = newNode; //we want what temp next to point at the newNode(one being inserted)
+                                        //as opposed to the one pointing after it
+            
             else
-            tail = newNode;
+            tail = newNode;  // if inserting at tail, want to newNode to be at tail, and temp next points at it
             temp->next = newNode;
             }
 
@@ -72,24 +78,24 @@ class DoublyLinkedList  //creating class for list
             delete temp;
             }
             
-            void delete_pos(int pos) 
+            void delete_pos(int pos) //delete node based on position
             {
-            if (!head) {
+            if (!head) {  //check to see if list is empty
             cout << "List is empty." << endl;
             return;
             }
-            if (pos == 1) {
-            pop_front();
+            if (pos == 1) { //if the first position
+            pop_front(); //call pop_front that deletes the first node 
             return;
             }
-            Node* temp = head;
+            Node* temp = head; //temp node
             for (int i = 1; i < pos; i++){
-            if (!temp) {
+            if (!temp) {  //check to make sure the position is valid
             cout << "Position doesn't exist." << endl;
             return;
             }
             else
-            temp = temp->next;
+            temp = temp->next; 
             }
             if (!temp) {
             cout << "Position doesn't exist." << endl;
@@ -161,7 +167,7 @@ class DoublyLinkedList  //creating class for list
             delete temp;
             }
             
-            ~DoublyLinkedList() 
+            ~DoublyLinkedList() //class destructor
             {
             while (head) {
             Node* temp = head;
@@ -172,28 +178,28 @@ class DoublyLinkedList  //creating class for list
 
             void print() 
             {
-            Node* current = head;
+            Node* current = head; //node to traverse list
             if (!current) {
-            cout << "List is empty." << endl;
+            cout << "List is empty." << endl; // check to see the list is not empty
             return;
             }
-            while (current) {
-            cout << current->data << " ";
-            current = current->next;
+            while (current) { //while not empty, and current is pointint at something
+            cout << current->data << " "; //print the data stored in node
+            current = current->next; //have current point at the next node
             }
             cout << endl;
             }
             
             void print_reverse() 
             {
-            Node* current = tail;
-            if (!current) {
+            Node* current = tail; //new node to traverse lsit
+            if (!current) {     //check to see current is actually pointing at somehting and list is not empty
             cout << "List is empty." << endl;
             return;
             }
-            while (current) {
-            cout << current->data << " ";
-            current = current->prev;
+            while (current) { //while pointing at something, keep iterating loop
+            cout << current->data << " "; //print the value at that location
+            current = current->prev;    //point backwards to previous node
             }
             cout << endl;
             }
