@@ -205,8 +205,15 @@ class DoublyLinkedList
 };
 
 int main() {
-cout << MIN_NR + MIN_LS + MAX_NR + MAX_LS; // dummy statement to avoid compiler warning
+//cout << MIN_NR + MIN_LS + MAX_NR + MAX_LS; // dummy statement to avoid compiler warning
 
+DoublyLinkedList list;
+int size = rand()% (MAX_LS - MIN_LS + 1) + MIN_LS; 
+
+for(int i = 0; i < size; ++i)
+    list.push_back(rand() % (MAX_NR - MIN_NR + 1) + MIN_NR); 
+
+list.print(); 
 
 
 
