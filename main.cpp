@@ -200,20 +200,29 @@ class DoublyLinkedList
 
             void every_other_element()
             {
-
+                Node * current = head; //create a node to traverse list and point it to head
+                while(current) // while current points to something run the loop
+                {
+                    cout<<current->data<<" "; //print the data of the first element 
+                    current = current->next->next; // point it to the next one ,and then the next one
+                    //current = current->next;        so it should skip the next one in the list
+                }
             }
 };
 
 int main() {
 //cout << MIN_NR + MIN_LS + MAX_NR + MAX_LS; // dummy statement to avoid compiler warning
 
-DoublyLinkedList list;
-int size = rand()% (MAX_LS - MIN_LS + 1) + MIN_LS; 
+DoublyLinkedList list;    // create a list
+int size = rand()% (MAX_LS - MIN_LS + 1) + MIN_LS;  
 
 for(int i = 0; i < size; ++i)
-    list.push_back(rand() % (MAX_NR - MIN_NR + 1) + MIN_NR); 
+    list.push_back(rand() % (MAX_NR - MIN_NR + 1) + MIN_NR); //populate list 
 
-list.print(); 
+list.print(); //print list
+cout<<endl<<endl; 
+
+list.every_other_element(); //print every other function
 
 
 
