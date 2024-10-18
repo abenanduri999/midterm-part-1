@@ -106,10 +106,10 @@ class DoublyLinkedList  //creating class for list
             return;
             }
 
-            Node* tempPrev = temp->prev; 
-            tempPrev->next = temp->next;
-            temp->next->prev = tempPrev;
-            delete temp;
+            Node* tempPrev = temp->prev;  // new node pointing to the node before temp
+            tempPrev->next = temp->next; //temprev now points forward to the node after temp
+            temp->next->prev = tempPrev; //make the node after temp point to the one before temp
+            delete temp; //delete temp and the node at that position
             }
 
             void push_back(int v)  // add node to tail
@@ -171,7 +171,7 @@ class DoublyLinkedList  //creating class for list
             ~DoublyLinkedList() //class destructor
             {
             while (head) {
-            Node* temp = head;
+            Node* temp = head; //keep advancing temp to keep deleteing one node at a time as long as list is not empty
             head = head->next;
             delete temp;
             }
